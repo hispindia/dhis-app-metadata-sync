@@ -53,7 +53,7 @@
             font-size: 15px;
         }
 
-        .glyphicon.glyphicon-inbox, .glyphicon.glyphicon-refresh, .glyphicon.glyphicon-globe, .glyphicon.glyphicon-time {
+        .glyphicon.glyphicon-inbox, .glyphicon.glyphicon-refresh, .glyphicon.glyphicon-globe, .glyphicon.glyphicon-time,.glyphicon.glyphicon-log-out {
             font-size: 35px;
             margin-top: 18px;
         }
@@ -152,39 +152,33 @@
 <div class="container" id="main">
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img class="img-responsive" src="images/syncicon.png" width="350px" ></a>
 
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <div id="navBack">
+                    <nav>
+                        <ul class="navig">
+                            <li><a href="index.html" class="" data-toggle="tooltip" data-placement="bottom" title="Instances"><b class="glyphicon glyphicon-inbox"></b></a></li>
+                            <li><a href="basicSettings.html" class="" data-toggle="tooltip" data-placement="bottom" title="Synchronize"><b class="glyphicon glyphicon-refresh"></b></a></li>
+                            <li><a href="notifications.html" class="" data-toggle="tooltip" data-placement="bottom" title="Notifications"><b class="glyphicon glyphicon-globe"></b></a></li>
+                            <li><a href="history.html" class="" data-toggle="tooltip" data-placement="bottom" title="History"><b class="glyphicon glyphicon-time"></b></a></li>
+                            <li><a href="../../../" class="" data-toggle="tooltip" data-placement="bottom" title="Redirect to DHIS2"><b class="glyphicon glyphicon-refresh"></b></a></li>
 
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-                aria-expanded="false" aria-controls="navbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/"><img id="ccc" src="images/syncicon.png" class="img-responsive"
-                                              style="width:400px; margin-top: 10px;" alt="Your Logo"></a>
-
-
-        <div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
-
-
-            <ul class="navig pull-right">
-                <li><a href="index.html" class="col-sm-2" data-toggle="tooltip" data-placement="bottom"
-                       title="Instances"><span class="glyphicon glyphicon-inbox"></span></a></li>
-                <li><a href="basicSettings.html" class="col-sm-2" data-toggle="tooltip" data-placement="bottom"
-                       title="Synchronize"><span class="glyphicon glyphicon-refresh"></span></a></li>
-                <li><a href="notifications.html" class="col-sm-2" data-toggle="tooltip" data-placement="bottom"
-                       title="Notifications"><span class="glyphicon glyphicon-globe"></span></a></li>
-                <li><a href="history.html" class="col-sm-2" data-toggle="tooltip" data-placement="bottom"
-                       title="History"><span class="glyphicon glyphicon-time"></span></a></li>
-            </ul>
-
-
+                        </ul>
+                    </nav>
+                </div>
+            </div><!--/.nav-collapse -->
         </div>
-        <!--/.nav-collapse -->
-
-    </nav>
-
-    </br></br><br/><br/><br/><br/><br/><br/>
+    </nav> </br></br>
 
     <div class="row">
         <div class="col-sm-12">
