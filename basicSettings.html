@@ -252,6 +252,16 @@
                                                     <image src="images/loader.gif"/>
                                                 </div>
                                                 <div class="form-group"></div>
+
+                                                <h4>
+                                                    <small><strong>Select a Group Set</strong></small>
+                                                </h4>
+                                                <select class="form-control" ng-options="item.name for item in orgUnitGroupSets"
+                                                        ng-change=" getAllGroupsByGroupsetId(selectedOrgUnitGroupSet.id)"
+                                                        ng-model="selectedOrgUnitGroupSet" title="Select a Group Set">
+                                                    <option selected="false" value=""> </option>
+                                                </select>
+
                                                 <h4>
                                                     <small><strong>Select a Group</strong></small>
                                                 </h4>

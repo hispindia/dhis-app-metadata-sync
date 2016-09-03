@@ -7,20 +7,36 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
     lastMonth = $filter('date')(lastMonth, 'yyyy-MM-dd');
 
     var date = "";
+
+
+    $scope.ORGGroup = []; // ngmodel for org unit group filter
+    $scope.orgUnitGroupSets = []; // holds all orgunit Groupsets
+
     $http.get(apiUrl).then(function (response) {
         if (!response.data == "")
             $rootScope.setting = JSON.parse(response.data.value);
 
     });
 
-    //load dropdown list for group
-    var organisationUnitGroups = "../../organisationUnitGroups.json?fields=[id,name]&paging=false";
-    $http.get(organisationUnitGroups).then(function (response) {
+    //load dropdown list for group set
+    var orgUnitGroupSet = "../../organisationUnitGroupSets.json?fields=[id,name]&paging=false";
+    $http.get(orgUnitGroupSet).then(function (response) {
         if (!response.data == "")
-            $scope.ORGGroup = response.data.organisationUnitGroups;
+            $scope.orgUnitGroupSets = response.data.organisationUnitGroupSets;
 
     });
 
+    var organisationUnitGroups = "../../organisationUnitGroups.json?fields=[id,name,organisationUnitGroupSet]&paging=false";
+    $http.get(organisationUnitGroups).then(function (response) {
+        if (!response.data == "")
+
+        console.log(response);
+        console.log(response.data.organisationUnitGroups);
+
+            $scope.ORGGroups = response.data.organisationUnitGroups;
+            //$scope.ORGGroup = $scope.ORGGroups
+
+    });
 
     var insarray = [];
     $http.get(apiUrl).then(function (response) {
@@ -42,7 +58,8 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
     $scope.sel = {};
 
 
-    var orgUnitUrl = "../../organisationUnits.json?fields=[code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,attributeValues]&paging=false";
+    //var orgUnitUrl = "../../organisationUnits.json?fields=[code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,attributeValues]&paging=false";
+    var orgUnitUrl = "../../organisationUnits.json?fields=[code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,closedDate,attributeValues,phoneNumber,address,email,contactPerson]&paging=false";
    // var orgUnitGroupUrl = "../../organisationUnitGroups.json?fields=[code,created,lastUpdated,name,id,href,shortName,displayName,displayShortName,externalAccess,access,userGroupAccesses,,attributeValues,organisationUnits]&paging=false";
 
     var orgUnitJson;
@@ -246,12 +263,26 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
         }
     };
 
-    $scope.getGroup = function (group) {
+    $scope.getAllGroupsByGroupsetId = function(orgUnitGroupsetId) {
+
+        if($scope.ORGGroup.length > 0)
+            $scope.ORGGroup.length = 0;
+
+        angular.forEach($scope.ORGGroups, function (item, key) {
+            if(item.organisationUnitGroupSet !== undefined && item.organisationUnitGroupSet.id == orgUnitGroupsetId){
+                $scope.ORGGroup.push(item);
+            }
+        });
+
+    };
+
+    $scope. getGroup= function (group) {
 
         orgGroup = group;
         $scope.json();
 
     };
+
     var userUrl;
     var natUserUrl = "../../me.json";
     var indexes = [];

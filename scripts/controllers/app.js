@@ -11,7 +11,8 @@
 	var category = "";
 	var attributeJson;
 	var dataElementJson;
-	var DataElementUrl = "../../dataElements.json?fields=[name,type,code,created,lastUpdated,externalAccess,user,shortName,aggregationType,aggregationOperator,attributeValues,dataDimension,domainType,categoryCombo,url,optionSet,commentOptionSet,valueType,formName,publicAccess,zeroIsSignificant,id,optionSetValue]&paging=false";
+	//var DataElementUrl = "../../dataElements.json?fields=[name,type,code,created,lastUpdated,externalAccess,user,shortName,aggregationType,aggregationOperator,attributeValues,dataDimension,domainType,categoryCombo,url,optionSet,commentOptionSet,valueType,formName,publicAccess,zeroIsSignificant,id,optionSetValue]&paging=false";
+	var DataElementUrl = "../../dataElements.json?fields=:all&paging=false";
 
 	/** -------------------------------------------- **/
 	/** Other needed options as global variables	 **/
