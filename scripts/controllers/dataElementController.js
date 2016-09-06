@@ -80,6 +80,7 @@ app.controller('dataElementController', function ($scope, $rootScope, $filter, $
     var categoryOptionUrl = "../../categoryOptions.json?fields=[:all]&paging=false";
     var optionSetsUrl = "../../optionSets.json?fields=[:all]&paging=false";
     var optionsUrl = "../../options.json?fields=[:all]&paging=false";
+    var deGroupUrl = "../../dataElementGroups.json?fields=[:all]&paging=false";
 
 
     //declaring variables to store the JSON data
@@ -89,6 +90,7 @@ app.controller('dataElementController', function ($scope, $rootScope, $filter, $
     var categoryOptionJson;
     var optionSetsJson;
     var optionsJson;
+    var deGroupJson;
 
     //variable to check whether JSON data have already loaded or not
     var check = 0;
@@ -149,7 +151,14 @@ app.controller('dataElementController', function ($scope, $rootScope, $filter, $
                 });
 
             }
-            $q.all([a, b, c, d, e, f, g]).then(function (result) {
+            var h = $http.get(deGroupUrl).then(function (response) {
+                if (!response.data == "")
+                //console.log(response.data);
+                    deGroupJson = response.data;
+
+            });
+
+            $q.all([a, b, c, d, e, f, g, h]).then(function (result) {
                 check++;
                 $scope.loading = false;
                 if (deGroup == undefined) {
@@ -651,6 +660,7 @@ angular.forEach(metaData.options, function (item, key) {
             angular.forEach(insarray.instances, function (item, key) {
 
                 filData[key] = {
+                    dataElementGroups: [],
                     attributes: [],
                     dataElements: [],
                     categoryCombos: [],
@@ -787,6 +797,7 @@ angular.forEach(metaData.options, function (item, key) {
             indexes[key] = 0;
 
             filData[key] = {
+                dataElementGroups: [],
                 attributes: [],
                 dataElements: [],
                 categoryCombos: [],
@@ -1017,6 +1028,25 @@ angular.forEach(metaData.options, function (item, key) {
                 if (filData[key].dataElements.length > 0 || filData[key].categoryCombos.length > 0 || filData[key].categories.length > 0 || filData[key].categoryOptions.length > 0 || filData[key].optionSets.length > 0 || filData[key].options.length > 0) {
                     if (filData[key].dataElements.length > 0) {
 
+                        for (var ind = 0; ind < filData[key].dataElements.length; ind++) {
+                            if (filData[key].dataElements[ind].dataElementGroups) {
+                                for (var ind2 = 0; ind2 < filData[key].dataElements[ind].dataElementGroups.length; ind2++) {
+
+
+                                    for (var val = 0; val < deGroupJson.dataElementGroups.length; val++) {
+                                        if (deGroupJson.dataElementGroups[val].id == filData[key].dataElements[ind].dataElementGroups[ind2].id) {
+                                            var result = $.grep(filData[key].dataElementGroups, function (e) {
+                                                return e.id === deGroupJson.dataElementGroups[val].id;
+                                            });
+                                            if (result.length == 0) {
+                                                filData[key].dataElementGroups.push(deGroupJson.dataElementGroups[val]);
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
 
                         for (var ind = 0; ind < filData[key].dataElements.length; ind++) {
                             if (filData[key].dataElements[ind].attributeValues) {
