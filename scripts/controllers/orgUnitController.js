@@ -59,11 +59,11 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
 
     //var orgUnitUrl = "../../organisationUnits.json?fields=[code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,attributeValues]&paging=false";
-    var orgUnitUrl = "../../organisationUnits.json?fields=[code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,closedDate,attributeValues,phoneNumber,address,email,contactPerson]&paging=false";
-   // var orgUnitGroupUrl = "../../organisationUnitGroups.json?fields=[code,created,lastUpdated,name,id,href,shortName,displayName,displayShortName,externalAccess,access,userGroupAccesses,,attributeValues,organisationUnits]&paging=false";
+    var orgUnitUrl = "../../organisationUnits.json?fields=code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,closedDate,attributeValues,phoneNumber,address,email,contactPerson,organisationUnitGroups[id]&paging=false";
+    var orgUnitGroupUrl = "../../organisationUnitGroups.json?fields=:all&paging=false";
 
     var orgUnitJson;
-    //var orgUnitGroupJson;
+    var orgUnitGroupJson;
     var check = 0;
     var filData = [];
     var selData = [];
@@ -81,14 +81,15 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                 orgUnitJson = response.data;
 
             });
-           /*  var b = $http.get(orgUnitGroupUrl).then(function (response) {
-             if (!response.data == "")
 
-             orgUnitGroupJson = response.data;
+            var b = $http.get(orgUnitGroupUrl).then(function (response) {
+                if (!response.data == "")
 
-             });*/
+                orgUnitGroupJson = response.data;
+
+            });
+
             var g;
-
             if (typeof attributeJson === 'undefined') {
                 g = $http.get(attributeUrl).then(function (response) {
                     if (!response.data == "")
@@ -99,7 +100,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
             }
 
-            $q.all([a, g]).then(function (result) {
+            $q.all([a,b,g]).then(function (result) {
                 check++;
                 $scope.loading = false;
                 if (orgGroup == undefined) {
@@ -390,7 +391,22 @@ $scope.checkAll=function(instance){
                         }
                     }
 
-
+                    for (var ind = 0; ind < filData[key].organisationUnits.length; ind++) {
+                        if (filData[key].organisationUnits[ind].organisationUnitGroups) {
+                            for (var ind2 = 0; ind2 < filData[key].organisationUnits[ind].organisationUnitGroups.length; ind2++) {
+                                for (var val = 0; val < orgUnitGroupJson.organisationUnitGroups.length; val++) {
+                                    if (orgUnitGroupJson.organisationUnitGroups[val].id == filData[key].organisationUnits[ind].organisationUnitGroups[ind2].id) {
+                                        var result = $.grep(filData[key].organisationUnitGroups, function (e) {
+                                            return e.id === orgUnitGroupJson.organisationUnitGroups[val].id;
+                                        });
+                                        if (result.length == 0) {
+                                            filData[key].organisationUnitGroups.push(orgUnitGroupJson.organisationUnitGroups[val]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     for (var a = 0; a < filData[key].organisationUnits.length; a++) {
                         for (var b = 0; b < orgUnitJson.organisationUnits.length; b++) {
