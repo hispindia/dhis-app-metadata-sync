@@ -30,11 +30,11 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
     $http.get(organisationUnitGroups).then(function (response) {
         if (!response.data == "")
 
-        console.log(response);
+            console.log(response);
         console.log(response.data.organisationUnitGroups);
 
-            $scope.ORGGroups = response.data.organisationUnitGroups;
-            //$scope.ORGGroup = $scope.ORGGroups
+        $scope.ORGGroups = response.data.organisationUnitGroups;
+        //$scope.ORGGroup = $scope.ORGGroups
 
     });
 
@@ -53,7 +53,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
     $scope.select = [];
     $scope.select.org = [];
     $scope.select.orgins = [];
-	$scope.select = {};
+    $scope.select = {};
     $scope.orgid = {};
     $scope.sel = {};
 
@@ -79,14 +79,14 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
             var a = $http.get(orgUnitUrl).then(function (response) {
                 if (!response.data == "")
 
-                orgUnitJson = response.data;
+                    orgUnitJson = response.data;
 
             });
 
             var b = $http.get(orgUnitGroupUrl).then(function (response) {
                 if (!response.data == "")
 
-                orgUnitGroupJson = response.data;
+                    orgUnitGroupJson = response.data;
 
             });
 
@@ -95,13 +95,13 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                 g = $http.get(attributeUrl).then(function (response) {
                     if (!response.data == "")
 
-                    attributeJson = (response.data);
+                        attributeJson = (response.data);
 
                 });
 
             }
 
-            $q.all([a,b,g]).then(function (result) {
+            $q.all([a, b, g]).then(function (result) {
                 check++;
                 $scope.loading = false;
                 if (orgGroup == undefined) {
@@ -187,13 +187,13 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
             $scope.organisationUnits = metaData.organisationUnits;
         }
 //
-	angular.forEach(metaData.organisationUnits, function (item, key) {
-    $scope.select[item.id] = $scope.select[item.id] || {};
+        angular.forEach(metaData.organisationUnits, function (item, key) {
+            $scope.select[item.id] = $scope.select[item.id] || {};
 
-    angular.forEach(insarray.instances, function (index, key) {
-        $scope.select[item.id][index.id] = false;
-    });
-});
+            angular.forEach(insarray.instances, function (index, key) {
+                $scope.select[item.id][index.id] = false;
+            });
+        });
 //
 
 
@@ -265,20 +265,20 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
         }
     };
 
-    $scope.getAllGroupsByGroupsetId = function(orgUnitGroupsetId) {
+    $scope.getAllGroupsByGroupsetId = function (orgUnitGroupsetId) {
 
-        if($scope.ORGGroup.length > 0)
+        if ($scope.ORGGroup.length > 0)
             $scope.ORGGroup.length = 0;
 
         angular.forEach($scope.ORGGroups, function (item, key) {
-            if(item.organisationUnitGroupSet !== undefined && item.organisationUnitGroupSet.id == orgUnitGroupsetId){
+            if (item.organisationUnitGroupSet !== undefined && item.organisationUnitGroupSet.id == orgUnitGroupsetId) {
                 $scope.ORGGroup.push(item);
             }
         });
 
     };
 
-    $scope.getGroup=function (group) {
+    $scope.getGroup = function (group) {
 
         orgGroup = group;
         $scope.json();
@@ -303,10 +303,10 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
     };
 
-    $scope.checkAll=function(instance){
-		
+    $scope.checkAll = function (instance) {
+
         angular.forEach(metaData.organisationUnits, function (index, key) {
-            $scope.select[index.id][instance]=  $scope.sel[instance];
+            $scope.select[index.id][instance] = $scope.sel[instance];
 
         });
 
@@ -337,7 +337,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                 var dataaa = metaData.organisationUnits[key];
                 x++;
                 angular.forEach(insarray.instances, function (instance, key) {
-                    if ( $scope.select[item.id][instance.id]) {
+                    if ($scope.select[item.id][instance.id]) {
                         filData[key].organisationUnits[indexes[key]] = dataaa;
                         selData[key].organisationUnits[indexes[key]] = dataaa;
 
@@ -349,7 +349,6 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                     }
 
                 });
-
 
 
             }
@@ -680,14 +679,14 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
             }
             if (respo[j].status == "SUCCESS" && respo[j].type == "OrganisationUnitGroup") {
 
-             allSyncData += '\n Organisation Unit Groups\n ';
+                allSyncData += '\n Organisation Unit Groups\n ';
 
-             for (var k = 0; k < filData.organisationUnitGroups.length; k++) {
+                for (var k = 0; k < filData.organisationUnitGroups.length; k++) {
 
-             allSyncData += filData.organisationUnitGroups[k].name + "\n";
+                    allSyncData += filData.organisationUnitGroups[k].name + "\n";
 
-             }
-             }
+                }
+            }
         }
 
 
@@ -714,7 +713,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
         var y = $http.get(natUserUrl).then(function (response) {
             if (!response.data == "")
 
-            natUserID = response.data.id;
+                natUserID = response.data.id;
         });
 
         $q.all([y, z]).then(function () {
