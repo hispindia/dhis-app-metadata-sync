@@ -59,7 +59,8 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
 
     //var orgUnitUrl = "../../organisationUnits.json?fields=[code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,attributeValues]&paging=false";
-    var orgUnitUrl = "../../organisationUnits.json?fields=code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,closedDate,attributeValues,phoneNumber,address,email,contactPerson,organisationUnitGroups[id]&paging=false";
+    //var orgUnitUrl = "../../organisationUnits.json?fields=code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,closedDate,attributeValues,phoneNumber,address,email,contactPerson,organisationUnitGroups[id]&paging=false";
+    var orgUnitUrl = "../../organisationUnits.json?fields=:all&paging=false";
     var orgUnitGroupUrl = "../../organisationUnitGroups.json?fields=:all&paging=false";
 
     var orgUnitJson;
@@ -277,7 +278,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
     };
 
-    $scope. getGroup= function (group) {
+    $scope.getGroup=function (group) {
 
         orgGroup = group;
         $scope.json();
@@ -301,7 +302,8 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
         });
 
     };
-$scope.checkAll=function(instance){
+
+    $scope.checkAll=function(instance){
 		
         angular.forEach(metaData.organisationUnits, function (index, key) {
             $scope.select[index.id][instance]=  $scope.sel[instance];
@@ -309,7 +311,6 @@ $scope.checkAll=function(instance){
         });
 
     };
-
 
     $scope.syncAll = function () {
         var x1 = false;
