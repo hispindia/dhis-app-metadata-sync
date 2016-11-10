@@ -42,11 +42,12 @@ app.controller('notificationController', function ($rootScope, $http) {
 // TO PRINT SYNC HISTORY IN TABLE
 // ***************************************************************************************************
 // ***************************************************************************************************
-function stat(instance) {
-    //console.log(instance);
+function stat(ind) {
+
+    var instance = notificationList[ind];
     var index = 1;
     //var instance=JSON.parse(ins);
-   // console.log(instance.response.length);
+    //console.log(instance);
     $("#myModalLabel").html("Following Metadata Were affected by this");
     $('#share_list_popup').html(" ");
     for (var j = 0; j < instance.response.length; j++) {
@@ -205,7 +206,7 @@ function printTable() {
     var htmlStr = "";
     var index = 0;
 
-    notificationList.forEach(function (hs) {
+    notificationList.forEach(function (hs, index) {
         var j = JSON.stringify(hs);
         //console.log(j);
         htmlStr = "<tr align='center'>";
@@ -213,7 +214,7 @@ function printTable() {
         htmlStr += "<td>" + hs.date + "</td>";
         htmlStr += "<td>" + hs.instance + "</td>";
 
-        htmlStr += "<td> <input style='align-self: center' type='button' align='center' class='btn btn-primary' onclick='stat(" + j + ")' value='Info' > </input> </td>";
+        htmlStr += "<td> <input style='align-self: center' type='button' align='center' class='btn btn-primary' onclick='stat("+index+")' value='Info' > </input> </td>";
 
 
         htmlStr += "</tr>";
