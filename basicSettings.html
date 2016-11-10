@@ -40,10 +40,9 @@
             padding-top: 0;
         }
 
-        .input[type=checkbox]{
+        .input[type=checkbox] {
             margin: 0;
         }
-
 
         .navbar-brand {
             font-size: 30px;
@@ -53,12 +52,10 @@
             font-size: 15px;
         }
 
-        .glyphicon.glyphicon-inbox, .glyphicon.glyphicon-refresh, .glyphicon.glyphicon-globe, .glyphicon.glyphicon-time,.glyphicon.glyphicon-off {
+        .glyphicon.glyphicon-inbox, .glyphicon.glyphicon-refresh, .glyphicon.glyphicon-globe, .glyphicon.glyphicon-time, .glyphicon.glyphicon-off {
             font-size: 35px;
             margin-top: 18px;
         }
-
-
 
         .btn3d {
             position: relative;
@@ -84,8 +81,6 @@
             background-color: #f5f5f5;
         }
 
-
-
         #coverLoad {
             position: fixed;
             width: 100%;
@@ -93,7 +88,6 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 2147483647;
         }
-
 
         .loadImage {
             width: 150px;
@@ -109,8 +103,6 @@
             margin: 0 10px 0 0;
             color: #3399ff;
         }
-
-
 
         .navbar-brand {
             padding: 13px 15px;
@@ -154,24 +146,31 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img class="img-responsive" src="images/syncicon.png" width="350px" ></a>
+                <a class="navbar-brand" href="#"><img class="img-responsive" src="images/syncicon.png"
+                                                      width="350px"></a>
 
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <div id="navBack">
                     <nav>
                         <ul class="navig">
-                            <li><a href="index.html" class="" data-toggle="tooltip" data-placement="bottom" title="Instances"><b class="glyphicon glyphicon-inbox"></b></a></li>
-                            <li><a href="basicSettings.html" class="" data-toggle="tooltip" data-placement="bottom" title="Synchronize"><b class="glyphicon glyphicon-refresh"></b></a></li>
-                            <li><a href="notifications.html" class="" data-toggle="tooltip" data-placement="bottom" title="Notifications"><b class="glyphicon glyphicon-globe"></b></a></li>
-                            <li><a href="history.html" class="" data-toggle="tooltip" data-placement="bottom" title="History"><b class="glyphicon glyphicon-time"></b></a></li>
-                            <li><a href="../../../" class="" data-toggle="tooltip" data-placement="bottom" title="Redirect to DHIS2"><b class="glyphicon glyphicon-off"></b></a></li>
+                            <li><a href="index.html" class="" data-toggle="tooltip" data-placement="bottom"
+                                   title="Instances"><b class="glyphicon glyphicon-inbox"></b></a></li>
+                            <li><a href="basicSettings.html" class="" data-toggle="tooltip" data-placement="bottom"
+                                   title="Synchronize"><b class="glyphicon glyphicon-refresh"></b></a></li>
+                            <li><a href="notifications.html" class="" data-toggle="tooltip" data-placement="bottom"
+                                   title="Notifications"><b class="glyphicon glyphicon-globe"></b></a></li>
+                            <li><a href="history.html" class="" data-toggle="tooltip" data-placement="bottom"
+                                   title="History"><b class="glyphicon glyphicon-time"></b></a></li>
+                            <li><a href="../../../" class="" data-toggle="tooltip" data-placement="bottom"
+                                   title="Redirect to DHIS2"><b class="glyphicon glyphicon-off"></b></a></li>
 
                         </ul>
                     </nav>
@@ -256,10 +255,11 @@
                                                 <h4>
                                                     <small><strong>Select a Group Set</strong></small>
                                                 </h4>
-                                                <select class="form-control" ng-options="item.name for item in orgUnitGroupSets"
+                                                <select class="form-control"
+                                                        ng-options="item.name for item in orgUnitGroupSets"
                                                         ng-change=" getAllGroupsByGroupsetId(selectedOrgUnitGroupSet.id)"
                                                         ng-model="selectedOrgUnitGroupSet" title="Select a Group Set">
-                                                    <option selected="false" value=""> </option>
+                                                    <option selected="false" value=""></option>
                                                 </select>
 
                                                 <h4>
@@ -268,7 +268,7 @@
                                                 <select class="form-control" ng-options="ORG.name for ORG in ORGGroup"
                                                         ng-change=" getGroup(ORGgroupFilter.id)"
                                                         ng-model="ORGgroupFilter" title="Select a Group">
-                                                    <option selected="false" value=""> </option>
+                                                    <option selected="false" value=""></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -290,7 +290,8 @@
                             <div class="col-sm-4">
                                 <div class="form-group has-feedback has-feedback left">
                                     <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                    <input ng-model="ou.name" ng-trim="false" placeholder="Search" class="form-control" type="text"/>
+                                    <input ng-model="ou.name" ng-trim="false" placeholder="Search" class="form-control"
+                                           type="text"/>
 
                                 </div>
                             </div>
@@ -317,14 +318,18 @@
 																</span>
                                                     </th>
                                                     <th>Updated</th>
-													<th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                       <li style="display:inline-block">    <input type="checkbox"    ng-model="sel[item.id]" ng-click="checkAll(item.id)"  />
-																		{{ item.name }}</li>
+                                                    <th style="text-align:center;"><h5><strong>Select All/None</strong>
+                                                    </h5><br>
+                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                       <li style="display:inline-block"><input
+                                                                               type="checkbox" ng-model="sel[item.id]"
+                                                                               ng-click="checkAll(item.id)"/>
+                                                                           {{ item.name }}
+                                                                       </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                        </div>
+                                                    </th>
 
                                                 </tr>
                                                 </thead>
@@ -338,14 +343,17 @@
                                                     <td>{{ y.lastUpdated.split("T")[0] + " ("
                                                         +y.lastUpdated.split("T")[1].split(".")[0] + ")"}}
                                                     </td>
-													<td>
-															<div  >
-																	<span   data-ng-repeat="item in setting.instances" >
-																		<li style="display:inline-block"><input type="checkbox"    ng-model="select[y.id][item.id]"   />
-																		{{ item.name }}</li> 
+                                                    <td>
+                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="select[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                        </div>
+                                                    </td>
 
                                                 </tr>
                                                 </tbody>
@@ -363,7 +371,6 @@
                                 <!--<input type="button" style="align-content: center" value="SET MAPPING" class="btn btn-primary" title="Set Mapping" data-ng-click="coc()"/>-->
                             </div>
                         </div>
-                        
 
 
                         <!--tabel panel for organit unit-->
@@ -443,7 +450,7 @@
                                                             ng-options="DEG.name for DEG in DEGroup"
                                                             ng-change="getGroup(DEgroupFilter.id)"
                                                             ng-model="DEgroupFilter" title="Select a Group">
-                                                        <option value=""> </option>
+                                                        <option value=""></option>
                                                     </select>
                                                 </div>
 
@@ -475,7 +482,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group has-feedback has-feedback left">
                                                 <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                                <input ng-model="DE.name" ng-trim="false" placeholder="Search" class="form-control"
+                                                <input ng-model="DE.name" ng-trim="false" placeholder="Search"
+                                                       class="form-control"
                                                        type="text"/>
 
                                             </div>
@@ -501,14 +509,19 @@
                                                                         ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                                                 </th>
                                                                 <th>Updated</th>
-																<th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                           <li style="display:inline-block"><input type="checkbox"    ng-model="sel[item.id]" ng-click="checkAllInsDe(item.id)"  />
-																		{{ item.name }}</li>
+                                                                <th style="text-align:center;"><h5><strong>Select
+                                                                    All/None</strong></h5><br>
+                                                                    <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                           <li style="display:inline-block"><input
+                                                                                   type="checkbox"
+                                                                                   ng-model="sel[item.id]"
+                                                                                   ng-click="checkAllInsDe(item.id)"/>
+                                                                               {{ item.name }}
+                                                                           </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                                    </div>
+                                                                </th>
 
                                                             </tr>
                                                             </thead>
@@ -519,18 +532,21 @@
                                                                     <input type="checkbox" ng-model="deid[x.id]"
                                                                            ng-checked="toggle"/>
                                                                 </td>
-                                                                <td >{{ x.name }}</td>
+                                                                <td>{{ x.name }}</td>
                                                                 <td>{{ x.lastUpdated.split("T")[0] + " ("
                                                                     +x.lastUpdated.split("T")[1].split(".")[0] + ")"}}
                                                                 </td>
-																<td>
-															<div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"><input type="checkbox"    ng-model="select[x.id][item.id]"    />
-																		{{ item.name }}</li>
+                                                                <td>
+                                                                    <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="select[x.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                                    </div>
+                                                                </td>
 
                                                             </tr>
                                                             <!--x-->
@@ -551,7 +567,7 @@
                                         <!--<input type="button" style="align-content: center" value="SET MAPPING" class="btn btn-primary" title="Set Mapping" ng-click="syncde()"/>-->
                                     </div>
                                     <br/>
-                                    
+
                                     <br/>
                                 </div>
                             </div>
@@ -575,7 +591,8 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group has-feedback has-feedback left">
                                                     <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                                    <input ng-model="COC.name" ng-trim="false" placeholder="Search" class="form-control"
+                                                    <input ng-model="COC.name" ng-trim="false" placeholder="Search"
+                                                           class="form-control"
                                                            type="text"/>
 
                                                 </div>
@@ -596,7 +613,7 @@
                                                                         <input type="checkbox" ng-model="selectedAll2"
                                                                                ng-click="checkAllCoc()"/>
                                                                     </th>
-                                                                    <th  ng-click="sort('name')">Name
+                                                                    <th ng-click="sort('name')">Name
 																<span class="glyphicon sort-icon"
                                                                       ng-show="sortKey=='name'"
                                                                       ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
@@ -604,14 +621,19 @@
                                                                     </th>
                                                                     <th>Updated</th>
                                                                     <th> Info</th>
-																	<th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                            <li style="display:inline-block"><input type="checkbox"    ng-model="selcoc[item.id]" ng-click="checkAllInsCoc(item.id)"  />
-																		{{ item.name }}</li>
+                                                                    <th style="text-align:center;"><h5><strong>Select
+                                                                        All/None</strong></h5><br>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                            <li style="display:inline-block"><input
+                                                                                    type="checkbox"
+                                                                                    ng-model="selcoc[item.id]"
+                                                                                    ng-click="checkAllInsCoc(item.id)"/>
+                                                                                {{ item.name }}
+                                                                            </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                                        </div>
+                                                                    </th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -631,14 +653,17 @@
                                                                                title="Info about Updates" value="Info"
                                                                                ng-click="viewCOCdataElements(y.id)"/>
                                                                     </td>
-																	<td>
-															<div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"><input type="checkbox"    ng-model="selectcoc[y.id][item.id]"   />
-																		{{ item.name }}</li>
+                                                                    <td>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="selectcoc[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
@@ -658,7 +683,7 @@
                                         </div>
                                     </div>
                                     <br/>
-                                    
+
                                     <br/>
                                 </div>
                             </div>
@@ -682,7 +707,8 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group has-feedback has-feedback left">
                                                     <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                                    <input ng-model="C.name" ng-trim="false" placeholder="Search" class="form-control"
+                                                    <input ng-model="C.name" ng-trim="false" placeholder="Search"
+                                                           class="form-control"
                                                            type="text"/>
 
                                                 </div>
@@ -710,14 +736,19 @@
                                                                     </th>
                                                                     <th>Updated</th>
                                                                     <th> Info</th>
-																	<th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                           <li style="display:inline-block"><input type="checkbox"    ng-model="selc[item.id]" ng-click="checkAllInsC(item.id)"  />
-																		{{ item.name }}</li>
+                                                                    <th style="text-align:center;"><h5><strong>Select
+                                                                        All/None</strong></h5><br>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                           <li style="display:inline-block"><input
+                                                                                   type="checkbox"
+                                                                                   ng-model="selc[item.id]"
+                                                                                   ng-click="checkAllInsC(item.id)"/>
+                                                                               {{ item.name }}
+                                                                           </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                                        </div>
+                                                                    </th>
 
                                                                 </tr>
                                                                 </thead>
@@ -729,7 +760,7 @@
                                                                         <input type="checkbox" ng-model="cid[y.id]"
                                                                                ng-checked="toggle">
                                                                     </td>
-                                                                    <td >{{ y.name }}</td>
+                                                                    <td>{{ y.name }}</td>
                                                                     <td>{{ y.lastUpdated.split("T")[0] + " ("
                                                                         +y.lastUpdated.split("T")[1].split(".")[0] +
                                                                         ")"}}
@@ -738,14 +769,17 @@
                                                                                title="Info about Updates" value="Info"
                                                                                ng-click="viewCAdataElements(y.id)"/>
                                                                     </td>
-																	<td>
-															<div >
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"><input type="checkbox"    ng-model="selectc[y.id][item.id]"   />
-																		{{ item.name }}</li>
+                                                                    <td>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="selectc[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                                        </div>
+                                                                    </td>
 
                                                                 </tr>
                                                                 </tbody>
@@ -765,7 +799,7 @@
                                         </div>
                                     </div>
                                     <br/>
-                                    
+
                                     <br/>
                                 </div>
                             </div>
@@ -789,7 +823,8 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group has-feedback has-feedback left">
                                                     <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                                    <input ng-model="CO.name" ng-trim="false" placeholder="Search" class="form-control"
+                                                    <input ng-model="CO.name" ng-trim="false" placeholder="Search"
+                                                           class="form-control"
                                                            type="text"/>
 
                                                 </div>
@@ -810,21 +845,26 @@
                                                                         <input type="checkbox" ng-model="selectedAll4"
                                                                                ng-click="checkAllCo()"/>
                                                                     </th>
-                                                                    <th  ng-click="sort('name')">
+                                                                    <th ng-click="sort('name')">
                                                                         Name<span class="glyphicon sort-icon"
                                                                                   ng-show="sortKey=='name'"
                                                                                   ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                                                     </th>
                                                                     <th>Updated</th>
                                                                     <th> Info</th>
-																	<th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                           <li style="display:inline-block"><input type="checkbox"    ng-model="selco[item.id]"  ng-click="checkAllInsCo(item.id)"  />
-																		{{ item.name }}</li>
+                                                                    <th style="text-align:center;"><h5><strong>Select
+                                                                        All/None</strong></h5><br>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                           <li style="display:inline-block"><input
+                                                                                   type="checkbox"
+                                                                                   ng-model="selco[item.id]"
+                                                                                   ng-click="checkAllInsCo(item.id)"/>
+                                                                               {{ item.name }}
+                                                                           </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                                        </div>
+                                                                    </th>
 
                                                                 </tr>
                                                                 </thead>
@@ -837,7 +877,7 @@
                                                                                ng-model="coid[y.id]"
                                                                                ng-checked="toggle">
                                                                     </td>
-                                                                    <td >{{ y.name }}</td>
+                                                                    <td>{{ y.name }}</td>
                                                                     <td>{{ y.lastUpdated.split("T")[0] + " ("
                                                                         +y.lastUpdated.split("T")[1].split(".")[0] +
                                                                         ")"}}
@@ -846,14 +886,17 @@
                                                                                title="Info about Updates" value="Info"
                                                                                ng-click="viewCOdataElements(y.id)"/>
                                                                     </td>
-																<td>
-															<div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"><input type="checkbox"    ng-model="selectco[y.id][item.id]"    />
-																		{{ item.name }}</li>
+                                                                    <td>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="selectco[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                                 <!--x-->
                                                                 </tbody>
@@ -873,7 +916,7 @@
                                         </div>
                                     </div>
                                     <br/>
-                                    
+
                                     <br/>
                                 </div>
                             </div>
@@ -897,7 +940,8 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group has-feedback has-feedback left">
                                                     <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                                    <input ng-model="OS.name" ng-trim="false" placeholder="Search" class="form-control"
+                                                    <input ng-model="OS.name" ng-trim="false" placeholder="Search"
+                                                           class="form-control"
                                                            type="text"/>
 
                                                 </div>
@@ -918,21 +962,26 @@
                                                                         <input type="checkbox" ng-model="selectedAll5"
                                                                                ng-click="checkAllOs()"/>
                                                                     </th>
-                                                                    <th  ng-click="sort('name')">
+                                                                    <th ng-click="sort('name')">
                                                                         Name<span class="glyphicon sort-icon"
                                                                                   ng-show="sortKey=='name'"
                                                                                   ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                                                     </th>
                                                                     <th>Updated</th>
                                                                     <th> Info</th>
-																	<th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                           <li style="display:inline-block"><input type="checkbox"    ng-model="selos[item.id]" ng-click="checkAllInsOs(item.id)"  />
-																		{{ item.name }}</li>
+                                                                    <th style="text-align:center;"><h5><strong>Select
+                                                                        All/None</strong></h5><br>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                           <li style="display:inline-block"><input
+                                                                                   type="checkbox"
+                                                                                   ng-model="selos[item.id]"
+                                                                                   ng-click="checkAllInsOs(item.id)"/>
+                                                                               {{ item.name }}
+                                                                           </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                                        </div>
+                                                                    </th>
 
                                                                 </tr>
                                                                 </thead>
@@ -945,7 +994,7 @@
                                                                                ng-model="osid[y.id]"
                                                                                ng-checked="toggle">
                                                                     </td>
-                                                                    <td >{{ y.name }}</td>
+                                                                    <td>{{ y.name }}</td>
                                                                     <td>{{ y.lastUpdated.split("T")[0] + " ("
                                                                         +y.lastUpdated.split("T")[1].split(".")[0] +
                                                                         ")"}}
@@ -954,14 +1003,17 @@
                                                                                title="Info about Updates" value="Info"
                                                                                ng-click="viewOSdataElements(y.id)"/>
                                                                     </td>
-																<td>
-															<div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"><input type="checkbox"    ng-model="selectos[y.id][item.id]"    />
-																		{{ item.name }}</li>
+                                                                    <td>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="selectos[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                                 <!--x-->
                                                                 </tbody>
@@ -981,12 +1033,11 @@
                                         </div>
                                     </div>
                                     <br/>
-                                   
+
                                     <br/>
                                 </div>
                             </div>
                         </div>
-
 
 
                         <div id="o" class="panel panel-default">
@@ -1007,7 +1058,8 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group has-feedback has-feedback left">
                                                     <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                                    <input ng-model="O.name" ng-trim="false" placeholder="Search" class="form-control"
+                                                    <input ng-model="O.name" ng-trim="false" placeholder="Search"
+                                                           class="form-control"
                                                            type="text"/>
 
                                                 </div>
@@ -1028,21 +1080,26 @@
                                                                         <input type="checkbox" ng-model="selectedAll6"
                                                                                ng-click="checkAllO()"/>
                                                                     </th>
-                                                                    <th  ng-click="sort('name')">
+                                                                    <th ng-click="sort('name')">
                                                                         Name<span class="glyphicon sort-icon"
                                                                                   ng-show="sortKey=='name'"
                                                                                   ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                                                     </th>
                                                                     <th>Updated</th>
                                                                     <th> Info</th>
-																	<th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                          <li style="display:inline-block"><input type="checkbox"    ng-model="selo[item.id]" ng-click="checkAllInsO(item.id)"  />
-																		{{ item.name }}</li>
+                                                                    <th style="text-align:center;"><h5><strong>Select
+                                                                        All/None</strong></h5><br>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                          <li style="display:inline-block"><input
+                                                                                  type="checkbox"
+                                                                                  ng-model="selo[item.id]"
+                                                                                  ng-click="checkAllInsO(item.id)"/>
+                                                                              {{ item.name }}
+                                                                          </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                                        </div>
+                                                                    </th>
 
                                                                 </tr>
                                                                 </thead>
@@ -1054,7 +1111,7 @@
                                                                         <input type="checkbox" ng-model="oid[y.id]"
                                                                                ng-checked="toggle">
                                                                     </td>
-                                                                    <td >{{ y.name }}</td>
+                                                                    <td>{{ y.name }}</td>
                                                                     <td>{{ y.lastUpdated.split("T")[0] + " ("
                                                                         +y.lastUpdated.split("T")[1].split(".")[0] +
                                                                         ")"}}
@@ -1062,14 +1119,17 @@
                                                                     <td><input type="button" class="btn btn-primary"
                                                                                title="Info about Updates" value="Info"
                                                                                ng-click="viewOdataElements(y.id)"/></td>
-																			   <td>
-															<div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"><input type="checkbox"    ng-model="selecto[y.id][item.id]"    />
-																		{{ item.name }}</li>
+                                                                    <td>
+                                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="selecto[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                                        </div>
+                                                                    </td>
 
                                                                 </tr>
                                                                 <!--x-->
@@ -1090,7 +1150,7 @@
                                         </div>
                                     </div>
                                     <br/>
-                                
+
                                     <br/>
                                 </div>
                             </div>
@@ -1173,7 +1233,7 @@
                                                                 ng-options="IND.name for IND in INGroup"
                                                                 ng-change=" getGroup(INgroupFilter.id)"
                                                                 ng-model="INgroupFilter" title="Select a Group">
-                                                            <option value=""> </option>
+                                                            <option value=""></option>
                                                         </select>
                                                     </div>
 
@@ -1197,7 +1257,8 @@
                                 <div class="col-sm-4">
                                     <div class="form-group has-feedback has-feedback left">
                                         <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                        <input ng-model="ind.name" ng-trim="false" placeholder="Search" class="form-control" type="text"/>
+                                        <input ng-model="ind.name" ng-trim="false" placeholder="Search"
+                                               class="form-control" type="text"/>
 
                                     </div>
                                 </div>
@@ -1212,25 +1273,31 @@
                                                 <table class="table table-striped table-hover table-condensed table-bordered  ">
                                                     <thead>
                                                     <tr>
-                                                        <th> <h5><strong>Select All/None</strong></h5><br>
+                                                        <th><h5><strong>Select All/None</strong></h5><br>
                                                             <!------------------------/////////////////////////Here add this check box////------------------------------------------>
                                                             <input type="checkbox" ng-model="selectedAll"
                                                                    ng-click="checkAll2()"/>
                                                         </th>
-                                                        <th  ng-click="sort('name')">Name
+                                                        <th ng-click="sort('name')">Name
 															<span class="glyphicon sort-icon" ng-show="sortKey=='name'"
                                                                   ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
 															</span>
                                                         </th>
-                                                         <th>Updated</th>
-														 <th style="text-align:center;"><h5><strong>Select All/None</strong></h5><br>
-                                                                <div  >
-																	<span   data-ng-repeat="item in setting.instances"  >
-                                                                           <li style="display:inline-block"> <input type="checkbox"    ng-model="sel[item.id]" ng-click="checkAll(item.id)" ng-init="sel[item.id]=false" />
-																		{{ item.name }}</li>
+                                                        <th>Updated</th>
+                                                        <th style="text-align:center;"><h5><strong>Select
+                                                            All/None</strong></h5><br>
+                                                            <div>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                           <li style="display:inline-block"><input
+                                                                                   type="checkbox"
+                                                                                   ng-model="sel[item.id]"
+                                                                                   ng-click="checkAll(item.id)"
+                                                                                   ng-init="sel[item.id]=false"/>
+                                                                               {{ item.name }}
+                                                                           </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                            </div>
+                                                        </th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -1239,18 +1306,21 @@
                                                         <td>
                                                             <input type="checkbox" ng-model="indid[y.id]"/>
                                                         </td>
-                                                        <td >{{ y.name }}</td>
+                                                        <td>{{ y.name }}</td>
                                                         <td>{{ y.lastUpdated.split("T")[0] + " ("
                                                             +y.lastUpdated.split("T")[1].split(".")[0] + ")"}}
                                                         </td>
-														<td>
-															<div>
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"> <input type="checkbox"    ng-model="select[y.id][item.id]"    />
-																		{{ item.name }}</li>
+                                                        <td>
+                                                            <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="select[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                            </div>
+                                                        </td>
                                                         <!--<td><input type="button" class="btn btn-primary" title="Info about Updates" value="Info" ng-click="viewCOCdataElements(y.id)"/></td>-->
 
                                                     </tr>
@@ -1370,7 +1440,8 @@
                             <div class="col-sm-4">
                                 <div class="form-group has-feedback has-feedback left">
                                     <i class="glyphicon glyphicon-search form-control-feedback "></i>
-                                    <input ng-model="val.name" ng-trim="false" placeholder="Search" class="form-control" type="text"/>
+                                    <input ng-model="val.name" ng-trim="false" placeholder="Search" class="form-control"
+                                           type="text"/>
 
                                 </div>
                             </div>
@@ -1390,7 +1461,7 @@
                                                         <input type="checkbox" ng-model="selectedAll"
                                                                ng-click="checkAll2()"/>
                                                     </th>
-                                                    <th  ng-click="sort('name')">Name
+                                                    <th ng-click="sort('name')">Name
 															<span class="glyphicon sort-icon" ng-show="sortKey=='name'"
                                                                   ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
 															</span>
@@ -1398,14 +1469,18 @@
                                                     <!-- =================================================================================================================================================================================================================================================================================================================================-->
 
                                                     <th>Updated</th>
-													<th style="text-align:center;">
-                                                                <div><h5><strong>Select All/None</strong></h5><br>
-																	<span   data-ng-repeat="item in setting.instances" >
-                                                                          <li style="display:inline-block"> <input type="checkbox"    ng-model="sel[item.id]" ng-click="checkAll(item.id)" />
-																		{{ item.name }}</li>
+                                                    <th style="text-align:center;">
+                                                        <div><h5><strong>Select All/None</strong></h5><br>
+																	<span data-ng-repeat="item in setting.instances">
+                                                                          <li style="display:inline-block"><input
+                                                                                  type="checkbox"
+                                                                                  ng-model="sel[item.id]"
+                                                                                  ng-click="checkAll(item.id)"/>
+                                                                              {{ item.name }}
+                                                                          </li>
 																	</span>
-                                                                </div>
-                                                            </th>
+                                                        </div>
+                                                    </th>
 
 
                                                 </tr>
@@ -1416,18 +1491,21 @@
                                                     <td>
                                                         <input type="checkbox" ng-model="valid[y.id]"/>
                                                     </td>
-                                                    <td >{{ y.name }}</td>
+                                                    <td>{{ y.name }}</td>
                                                     <td>{{ y.lastUpdated.split("T")[0] + " ("
                                                         +y.lastUpdated.split("T")[1].split(".")[0] + ")"}}
                                                     </td>
-													<td>
-															<div >
-																	<span   data-ng-repeat="item in setting.instances"  >
-																		<li style="display:inline-block"> <input type="checkbox"    ng-model="select[y.id][item.id]"    />
-																		{{ item.name }}</li>
+                                                    <td>
+                                                        <div>
+																	<span data-ng-repeat="item in setting.instances">
+																		<li style="display:inline-block"><input
+                                                                                type="checkbox"
+                                                                                ng-model="select[y.id][item.id]"/>
+                                                                            {{ item.name }}
+                                                                        </li>
 																	</span>
-															</div>
-														</td>
+                                                        </div>
+                                                    </td>
                                                     <!--<td><input type="button" class="btn btn-primary" title="Info about Updates" value="Info" ng-click="viewCOCdataElements(y.id)"/></td>-->
                                                 </tr>
                                                 </tbody>
@@ -1446,27 +1524,27 @@
                             </div>
                         </div>
 
-                       <!--<div class="row">
-                            <div class="col-sm-12">
-                                <form  class="form-inline">
-                                    <div class="panel" style="margin-bottom: 0px;">
+                        <!--<div class="row">
+                             <div class="col-sm-12">
+                                 <form  class="form-inline">
+                                     <div class="panel" style="margin-bottom: 0px;">
 
-                                           <h4 style="margin: 0px"><strong>Instances</strong></h4>
-
-                                      
-                                    </div>
-                                    <div data-ng-repeat="item in setting.instances" class="form-group form-bordered">
-
-                                            <input class="form-control" type="checkbox" ng-model="select.valins[item.id]" checklist-model="setting.instances" checklist-value="item.id"/><label
-                                             ></label>{{" "+ item.name+" " }}&nbsp;
+                                            <h4 style="margin: 0px"><strong>Instances</strong></h4>
 
 
+                                     </div>
+                                     <div data-ng-repeat="item in setting.instances" class="form-group form-bordered">
+
+                                             <input class="form-control" type="checkbox" ng-model="select.valins[item.id]" checklist-model="setting.instances" checklist-value="item.id"/><label
+                                              ></label>{{" "+ item.name+" " }}&nbsp;
 
 
-                                    </div>
-                                </form>
-                            </div>
-                        </div>-->
+
+
+                                     </div>
+                                 </form>
+                             </div>
+                         </div>-->
                         <br/>
 
                         <input type="button"

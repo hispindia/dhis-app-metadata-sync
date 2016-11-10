@@ -13,7 +13,7 @@ app.controller('notificationController', function ($rootScope, $http) {
     $http.get(syncNotificationUrl).then(function (response) {
 		 
         if (response.data != "\"x\"" && response.data != "") {
-            console.log(response.data.data);
+            //console.log(response);
             $rootScope.notifications = response.data.data;
             notificationList = $rootScope.notifications;
 
