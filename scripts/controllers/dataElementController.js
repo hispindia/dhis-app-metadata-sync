@@ -319,7 +319,7 @@ app.controller('dataElementController', function ($scope, $rootScope, $filter, $
             var opSETIDs = "";
             var optIDs = "";
 
-            //loops to check the updations (dataElements.category combos,categories,category options)
+            //loops to check the updates (dataElements.category combos,categories,category options)
 
             for (var i = 0; i < dataElementJson.dataElements.length; i++) {
                 if (dataElementJson.dataElements[i].lastUpdated > date) {
@@ -1383,13 +1383,13 @@ angular.forEach(metaData.options, function (item, key) {
         var history = {};
         var newHistory = {};
         if (t == 0) {
-            newHistory.notification = "All the MetaData Updations Were Successfull";
+            newHistory.notification = "All the MetaData Updates Were Successfull";
             newHistory.instance = instance.name;
             newHistory.metaDataFilterd = fildata;
             newHistory.response = respo;
         }
         if (t == 1) {
-            newHistory.notification = "Some of the MetaData fields Updations Were Successfull";
+            newHistory.notification = "Some of the MetaData field Updates Were Successfull";
             newHistory.instance = instance.name;
             newHistory.metaDataFilterd = fildata;
             newHistory.response = respo;
@@ -1430,13 +1430,13 @@ angular.forEach(metaData.options, function (item, key) {
         var newNotification = {};
 
         if (t == 0) {
-            newNotification.notification = "All the MetaData Updations Were Successfull";
+            newNotification.notification = "All the MetaData Updates Were Successful";
             newNotification.instance = instance.name;
             newNotification.metaDataFilterd = fildata;
             newNotification.response = respo;
         }
         if (t == 1) {
-            newNotification.notification = "Some of the MetaData fields Updations Were Successfull";
+            newNotification.notification = "Some of the MetaData field Updates Were Successful";
             newNotification.instance = instance.name;
             newNotification.metaDataFilterd = fildata;
             newNotification.response = respo;

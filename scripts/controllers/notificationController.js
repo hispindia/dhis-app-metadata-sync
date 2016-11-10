@@ -196,7 +196,7 @@ function stat(ind) {
         }
     }
     if (index == 1) {
-        $('#share_list_popup').append('<span align="left"><strong>' + 'There were no Updations in Meta Data ' + '</strong></span><br>');
+        $('#share_list_popup').append('<span align="left"><strong>' + 'There were no Updates in Meta Data ' + '</strong></span><br>');
 
     }
     $("#alertModal").modal("show");

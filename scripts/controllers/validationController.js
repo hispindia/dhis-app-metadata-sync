@@ -519,13 +519,13 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
         var newNotification = {};
 
         if (t == 0) {
-            newNotification.notification = "All the MetaData Updations Were Successfull";
+            newNotification.notification = "All the MetaData Updates Were Successful";
             newNotification.instance = instance.name;
             newNotification.metaDataFilterd = fildata;
             newNotification.response = respo;
         }
         if (t == 1) {
-            newNotification.notification = "Some of the MetaData fields Updations Were Successfull";
+            newNotification.notification = "Some of the MetaData fields Updates Were Successful";
             newNotification.instance = instance.name;
             newNotification.metaDataFilterd = fildata;
             newNotification.response = respo;
@@ -567,14 +567,14 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
         var history = {};
         var newHistory = {};
         if (t == 0) {
-            newHistory.notification = "All the MetaData Updations Were Successfull";
+            newHistory.notification = "All the MetaData Updates Were Successful";
             newHistory.instance = instance.name;
             newHistory.metaDataFilterd = fildata;
             newHistory.response = respo;
 
         }
         if (t == 1) {
-            newHistory.notification = "Some of the MetaData fields Updations Were Successfull";
+            newHistory.notification = "Some of the MetaData field Updates Were Successful";
             newHistory.instance = instance.name;
             newHistory.metaDataFilterd = fildata;
             newHistory.response = respo;
