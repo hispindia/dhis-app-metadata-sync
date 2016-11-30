@@ -62,9 +62,11 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
     //var orgUnitUrl = "../../organisationUnits.json?fields=code,id,name,created,lastUpdated,externalAccess,shortName,uuid,parent,path,openingDate,closedDate,attributeValues,phoneNumber,address,email,contactPerson,organisationUnitGroups[id]&paging=false";
     var orgUnitUrl = "../../organisationUnits.json?fields=:all&paging=false";
     var orgUnitGroupUrl = "../../organisationUnitGroups.json?fields=:all&paging=false";
+    var orgUnitGroupSetUrl = "../../organisationUnitGroupSets.json?fields=:all&paging=false";
 
     var orgUnitJson;
     var orgUnitGroupJson;
+    var orgUnitGroupSetJson;
     var check = 0;
     var filData = [];
     var selData = [];
@@ -90,6 +92,13 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
             });
 
+            var c = $http.get(orgUnitGroupSetUrl).then(function (response) {
+                if (!response.data == "")
+
+                    orgUnitGroupSetJson = response.data;
+
+            });
+
             var g;
             if (typeof attributeJson === 'undefined') {
                 g = $http.get(attributeUrl).then(function (response) {
@@ -101,7 +110,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
             }
 
-            $q.all([a, b, g]).then(function (result) {
+            $q.all([a,b,c,g]).then(function (result) {
                 check++;
                 $scope.loading = false;
                 if (orgGroup == undefined) {
@@ -165,7 +174,8 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
         {
             attributes: [],
             organisationUnits: [],
-            organisationUnitGroups: []
+            organisationUnitGroups: [],
+            organisationUnitGroupSets: []
 
         };
 
@@ -202,12 +212,14 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
             filData[key] = {
                 attributes: [],
                 organisationUnits: [],
-                organisationUnitGroups: []
+                organisationUnitGroups: [],
+                organisationUnitGroupSets: []
             };
             selData[key] = {
                 attributes: [],
                 organisationUnits: [],
-                organisationUnitGroups: []
+                organisationUnitGroups: [],
+                organisationUnitGroupSets: []
             };
 
         });
@@ -319,12 +331,14 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
             filData[key] = {
                 attributes: [],
                 organisationUnits: [],
-                organisationUnitGroups: []
+                organisationUnitGroups: [],
+                organisationUnitGroupSets: []
             };
             selData[key] = {
                 attributes: [],
                 organisationUnits: [],
-                organisationUnitGroups: []
+                organisationUnitGroups: [],
+                organisationUnitGroupSets: []
             };
 
         });
@@ -408,6 +422,23 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                         }
                     }
 
+                    for (var ind = 0; ind < filData[key].organisationUnitGroups.length; ind++) {
+                        if (filData[key].organisationUnitGroups[ind].organisationUnitGroupSets) {
+                            for (var ind2 = 0; ind2 < filData[key].organisationUnitGroups[ind].organisationUnitGroupSets.length; ind2++) {
+                                for (var val = 0; val < orgUnitGroupSetJson.organisationUnitGroupSets.length; val++) {
+                                    if (filData[key].organisationUnitGroups[ind].organisationUnitGroupSets[ind2].id == orgUnitGroupSetJson.organisationUnitGroupSets[val].id) {
+                                        var result = $.grep(filData[key].organisationUnitGroupSets, function (e) {
+                                            return e.id === orgUnitGroupSetJson.organisationUnitGroupSets[val].id;
+                                        });
+                                        if (result.length == 0) {
+                                            filData[key].organisationUnitGroupSets.push(orgUnitGroupSetJson.organisationUnitGroupSets[val]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     for (var a = 0; a < filData[key].organisationUnits.length; a++) {
                         for (var b = 0; b < orgUnitJson.organisationUnits.length; b++) {
                             if (filData[key].organisationUnits[a].parent && filData[key].organisationUnits[a].parent.id == orgUnitJson.organisationUnits[b].id) {
@@ -427,6 +458,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
 
 
                     var v = (filData[key]);
+                    console.log(v);
 
                     $("#coverLoad").show();
 
@@ -684,6 +716,16 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                 for (var k = 0; k < filData.organisationUnitGroups.length; k++) {
 
                     allSyncData += filData.organisationUnitGroups[k].name + "\n";
+
+                }
+            }
+            if (respo[j].status == "SUCCESS" && respo[j].type == "OrganisationUnitGroupSet") {
+
+                allSyncData += '\n Organisation Unit Group Sets\n ';
+
+                for (var k = 0; k < filData.organisationUnitGroupSets.length; k++) {
+
+                    allSyncData += filData.organisationUnitGroupSets[k].name + "\n";
 
                 }
             }
