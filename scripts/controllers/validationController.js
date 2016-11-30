@@ -41,9 +41,12 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
     $scope.sel = {};
 
 
-    var validationUrl = "../../validationRules.json?fields=[id,code,name,created,lastUpdated,externalAccess,description,importance,ruleType,periodType,operator,leftSide,rightSide,url]&paging=false";
+    //var validationUrl = "../../validationRules.json?fields=[id,code,name,created,lastUpdated,externalAccess,description,importance,ruleType,periodType,operator,leftSide,rightSide,url]&paging=false";
+    var validationUrl = "../../validationRules.json?fields=:all&paging=false";
+    var validationRuleGroupUrl = "../../validationRuleGroups.json?fields=:all&paging=false";
     var categoryOptionComboUrl = "../../categoryOptionCombos.json?fields=[:all]&paging=false";
     var validationJson;
+    var validationRuleGroupJson;
     var categoryOptionComboJson;
 
     var check = 0;
@@ -58,28 +61,27 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
             $scope.loading = true;
             var a = $http.get(validationUrl).then(function (response) {
                 if (!response.data == "")
-
                 validationJson = response.data;
-
             });
             var b;
             if (dataElementJson == undefined) {
                 b = $http.get(DataElementUrl).then(function (response) {
                     if (!response.data == "")
-
                     dataElementJson = response.data;
-
                 });
             }
 
             var c = $http.get(categoryOptionComboUrl).then(function (response) {
                 if (!response.data == "")
-
                 categoryOptionComboJson = response.data;
-
             });
 
-            $q.all([a, b,c]).then(function (result) {
+            var d = $http.get(validationRuleGroupUrl).then(function (response) {
+                if (!response.data == "")
+                    validationRuleGroupJson = response.data;
+            });
+
+            $q.all([a,b,c,d]).then(function (result) {
 				
                 check++;
                 $scope.loading = false;
@@ -145,6 +147,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
         metaData =
         {
             validationRules: [],
+            validationRuleGroup: [],
             dataElements: [],
             categoryOptionCombos:[]
         };
@@ -181,6 +184,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
 
             filData[key] = {
                 validationRules: [],
+                validationRuleGroups: [],
                 dataElements: [],
                 categoryOptionCombos:[]
 
@@ -285,6 +289,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
             indexes[key] = 0;
             filData[key] = {
                 validationRules: [],
+                validationRuleGroups: [],
                 dataElements: [],
                 categoryOptionCombos:[]
             };
@@ -294,8 +299,6 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
         var i = 0;
         angular.forEach(metaData.validationRules, function (item, key) {
             if ($scope.valid[item.id]) {
-
-
                 var dataaa = metaData.validationRules[key];
                 x++;
                 angular.forEach(insarray.instances, function (instance, key) {
@@ -307,13 +310,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                         x1 = true;
                     }
                 });
-
-
-
-
-
             }
-
         });
 
         if (x1 == false) {
@@ -421,9 +418,26 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                         }
                     }
 
+                    for (var a = 0; a < filData[key].validationRules.length; a++) {
+                        if(filData[key].validationRules[a].validationRuleGroups){
+                            for(var m = 0; m < filData[key].validationRules[a].validationRuleGroups.length; m++){
+                                for (var n = 0; n < validationRuleGroupJson.validationRuleGroups.length; n++) {
+                                    if (filData[key].validationRules[a].validationRuleGroups[m].id == validationRuleGroupJson.validationRuleGroups[n].id){
+                                        var result = $.grep(filData[key].validationRuleGroups, function (e) {
+                                            return e.id === validationRuleGroupJson.validationRuleGroups[n].id;
+                                        });
+                                        if (result.length == 0) {
+                                            filData[key].validationRuleGroups.push(validationRuleGroupJson.validationRuleGroups[n]);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     var v = (filData[key]);
-                    //    console.log(k);
+                    console.log(v);
                     $("#coverLoad").show();
                     var header = {
 
@@ -646,6 +660,15 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
 
                 for (var k = 0; k < filData.validationRules.length; k++) {
                     allSyncData += filData.validationRules[k].name + '\n';
+
+                }
+            }
+            if (respo[j].status == "SUCCESS" && respo[j].type == "ValidationRuleGroup") {
+
+                allSyncData += '\n Validation Rule Groups\n ';
+
+                for (var k = 0; k < filData.validationRuleGroups.length; k++) {
+                    allSyncData += filData.validationRuleGroups[k].name + '\n';
 
                 }
             }
