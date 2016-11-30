@@ -43,14 +43,25 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
     $scope.sel = {};
 
 
-    var indicatorUrl = "../../indicators.json?fields=[id,code,name,created,lastUpdated,externalAccess,shortName,description,annualized,indicatorType,numerator,numeratorDescription,denominator,denominatorDescription,indicatorGroups,url]&paging=false";
+    var indicatorUrl = "../../indicators.json?fields=[:all]&paging=false";
     var indicatorType = "../../indicatorTypes.json?fields=[:all]&paging=false";
+    var indicatorGroupSetUrl = "../../indicatorGroupSets.json?fields=[:all]&paging=false";
     var indicatorGroup = "../../indicatorGroups.json?fields=[:all]&paging=false";
     var categoryOptionComboUrl = "../../categoryOptionCombos.json?fields=[:all]&paging=false";
+
+    var categoryComboUrl = "../../categoryCombos.json?fields=[:all]&paging=false";
+    var categoryUrl = "../../categories.json?fields=[:all]&paging=false";
+    var categoryOptionUrl = "../../categoryOptions.json?fields=[:all]&paging=false";
 
     var indicatorJson;
     var indicatorTypeJson;
     var categoryOptionComboJson;
+
+    var categoryComboJson;
+    var categoryJson;
+    var categoryOptionJson;
+
+    var indicatorGroupSetJson;
     var indicatorGroupJson;
     var check = 0;
     var filData = [];
@@ -70,7 +81,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
             if (indicatorJson == undefined) {
                 a = $http.get(indicatorUrl).then(function (response) {
                     if (!response.data == "")
-                        console.log(response.data);
                     indicatorJson = response.data;
 
                 });
@@ -78,19 +88,16 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
             var b = $http.get(indicatorType).then(function (response) {
                 if (!response.data == "")
-                    console.log(response.data);
                 indicatorTypeJson = response.data;
 
             });
             var c = $http.get(indicatorGroup).then(function (response) {
                 if (!response.data == "")
-                    console.log(response.data);
                 indicatorGroupJson = response.data;
 
             });
             var d = $http.get(categoryOptionComboUrl).then(function (response) {
                 if (!response.data == "")
-                    console.log(response.data);
                 categoryOptionComboJson = response.data;
 
             });
@@ -98,7 +105,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
             if (dataElementJson == undefined) {
                 e = $http.get(DataElementUrl).then(function (response) {
                     if (!response.data == "")
-                        console.log(response.data);
                     dataElementJson = response.data;
 
                 });
@@ -108,13 +114,43 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
             if (attributeJson == undefined) {
                 f = $http.get(attributeUrl).then(function (response) {
                     if (!response.data == "")
-                        console.log(response.data);
                     attributeJson = (response.data);
 
                 });
-
             }
-            $q.all([a, b, c, d, e, f]).then(function (result) {
+            var g = $http.get(indicatorGroupSetUrl).then(function (response) {
+                console.log("resss : ");
+                console.log(response);
+                if (!response.data == "")
+                indicatorGroupSetJson = response.data;
+
+            });
+            var h;
+            if (categoryComboJson == undefined) {
+                h = $http.get(categoryComboUrl).then(function (response) {
+                    if (!response.data == "")
+                        categoryComboJson = (response.data);
+
+                });
+            }
+            var i;
+            if (categoryOptionJson == undefined) {
+                i = $http.get(categoryOptionUrl).then(function (response) {
+                    if (!response.data == "")
+                        categoryOptionJson = (response.data);
+
+                });
+            }
+            var j;
+            if (categoryJson == undefined) {
+                j = $http.get(categoryUrl).then(function (response) {
+                    if (!response.data == "")
+                        categoryJson = (response.data);
+
+                });
+            }
+
+            $q.all([a, b, c, d, e, f, g, h, i, j]).then(function (result) {
                 check++;
                 $scope.loading = false;
                 if (indGroup == undefined) {
@@ -180,8 +216,12 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
             attributes: [],
             indicators: [],
             indicatorTypes: [],
+            indicatorGroupSets: [],
             indicatorGroups: [],
             categoryOptionCombos: [],
+            categoryCombos: [],
+            categories: [],
+            categoryOptions: [],
             dataElements: []
 
 
@@ -223,8 +263,12 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                 attributes: [],
                 indicators: [],
                 indicatorTypes: [],
+                indicatorGroupSets: [],
                 indicatorGroups: [],
                 categoryOptionCombos: [],
+                categoryCombos: [],
+                categories: [],
+                categoryOptions: [],
                 dataElements: []
             };
 
@@ -325,8 +369,12 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                 attributes: [],
                 indicators: [],
                 indicatorTypes: [],
+                indicatorGroupSets: [],
                 indicatorGroups: [],
                 categoryOptionCombos: [],
+                categoryCombos: [],
+                categories: [],
+                categoryOptions: [],
                 dataElements: []
             };
 
@@ -369,13 +417,9 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
                 var instanceURL = instance.url + "/api/metaData";
                 if (filData[key].indicators.length > 0) {
-
-
                     for (var ind = 0; ind < filData[key].indicators.length; ind++) {
                         if (filData[key].indicators[ind].attributeValues) {
                             for (var ind2 = 0; ind2 < filData[key].indicators[ind].attributeValues.length; ind2++) {
-
-
                                 for (var val = 0; val < attributeJson.attributes.length; val++) {
                                     if (attributeJson.attributes[val].id == filData[key].indicators[ind].attributeValues[ind2].attribute.id) {
                                         var result = $.grep(filData[key].attributes, function (e) {
@@ -385,24 +429,20 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                                             filData[key].attributes.push(attributeJson.attributes[val]);
                                         }
                                     }
-
                                 }
                             }
                         }
                     }
 
-
                     for (var a = 0; a < filData[key].indicators.length; a++) {
                         for (var b = 0; b < indicatorTypeJson.indicatorTypes.length; b++) {
                             if (filData[key].indicators[a].indicatorType && filData[key].indicators[a].indicatorType.id == indicatorTypeJson.indicatorTypes[b].id) {
-
                                 var result = $.grep(filData[key].indicatorTypes, function (e) {
                                     return e.id === indicatorTypeJson.indicatorTypes[b].id;
                                 });
                                 if (result.length == 0) {
                                     filData[key].indicatorTypes.push(indicatorTypeJson.indicatorTypes[b]);
                                 }
-
                                 break;
                             }
                         }
@@ -412,19 +452,34 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                         for (var n = 0; n < indicatorGroupJson.indicatorGroups.length; n++) {
                             for (var o = 0; o < filData[key].indicators[m].indicatorGroups.length; o++) {
                                 if (filData[key].indicators[m].indicatorGroups && filData[key].indicators[m].indicatorGroups[o].id == indicatorGroupJson.indicatorGroups[n].id) {
-
                                     var result = $.grep(filData[key].indicatorGroups, function (e) {
                                         return e.id === indicatorGroupJson.indicatorGroups[n].id;
                                     });
                                     if (result.length == 0) {
                                         filData[key].indicatorGroups.push(indicatorGroupJson.indicatorGroups[n]);
                                     }
-
                                     break;
                                 }
                             }
                         }
                     }
+
+                    for(var m = 0; m < filData[key].indicatorGroups.length; m++) {
+                        if(filData[key].indicatorGroups[m].indicatorGroupSet){
+                            for (var n = 0; n < indicatorGroupSetJson.indicatorGroupSets.length; n++) {
+                                if (filData[key].indicatorGroups[m].indicatorGroupSet.id == indicatorGroupSetJson.indicatorGroupSets[n].id){
+                                    var result = $.grep(filData[key].indicatorGroupSets, function (e) {
+                                        return e.id === indicatorGroupSetJson.indicatorGroupSets[n].id;
+                                    });
+                                    if (result.length == 0) {
+                                        filData[key].indicatorGroupSets.push(indicatorGroupSetJson.indicatorGroupSets[n]);
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     var str;
                     var str1;
                     var str2;
@@ -457,6 +512,22 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                                         });
                                         if (result.length == 0) {
                                             filData[key].dataElements.push(dataElementJson.dataElements[c]);
+                                        }
+                                    }
+                                }
+
+                                for (var a = 0; a < filData[key].dataElements.length; a++) {
+                                    if(filData[key].dataElements[a].categoryCombo && filData[key].dataElements[a].categoryCombo.name != "default"){
+                                        for (var b = 0; b < categoryComboJson.categoryCombos.length; b++) {
+                                            if (filData[key].dataElements[a].categoryCombo.id == categoryComboJson.categoryCombos[b].id) {
+                                                var result = $.grep(filData[key].categoryCombos, function (e) {
+                                                    return e.id === categoryComboJson.categoryCombos[b].id;
+                                                });
+                                                if (result.length == 0) {
+                                                    filData[key].categoryCombos.push(categoryComboJson.categoryCombos[b]);
+                                                }
+                                                break;
+                                            }
                                         }
                                     }
                                 }
@@ -521,7 +592,7 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
 
                     var v = (filData[key]);
-                    console.log(k);
+                    console.log(v);
                     $("#coverLoad").show();
                     var header = {
 
@@ -545,7 +616,10 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
                         })
                         .error(function (response) {
-                            $().toastmessage('showErrorToast', 'Make Sure Whether the Instance <br/>' + instance.name + ' is Connected . ');
+                            //$().toastmessage('showErrorToast', 'Make Sure Whether the Instance <br/>' + instance.name + ' is Connected . ');
+                            $().toastmessage('showErrorToast', response);
+                            console.log("error response");
+                            console.log(response);
                             saveSync("error", filData[key], instance, "error");
                             $("#coverLoad").hide();
                         });
@@ -760,6 +834,18 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
                 }
             }
+
+            if (respo[j].status == "SUCCESS" && respo[j].type == "IndicatorGroupSet") {
+
+                allSyncData += '\n Indicator Group Sets-:\n ';
+
+                for (var k = 0; k < filData.indicatorGroupSets.length; k++) {
+
+                    allSyncData += filData.indicatorGroupSets[k].name + "\n";
+
+                }
+            }
+
             if (respo[j].status == "SUCCESS" && respo[j].type == "IndicatorGroup") {
 
                 allSyncData += '\n Indicator Groups-:\n ';
