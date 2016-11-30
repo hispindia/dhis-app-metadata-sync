@@ -330,7 +330,6 @@ app.controller('dataElementController', function ($scope, $rootScope, $filter, $
                 else if (dataElementJson.dataElements[i].categoryCombo.name == "default") {
                     continue;
                 }
-
                 else {
                     for (var j = 0; j < categoryComboJson.categoryCombos.length; j++) {
                         if (categoryComboJson.categoryCombos[j].name == "default") {
@@ -605,7 +604,7 @@ app.controller('dataElementController', function ($scope, $rootScope, $filter, $
                 }
 				
 				
-				}
+        }
 //-------------------------------Initalizing to False /All Check box Properities-----------------------------------------------//
 	angular.forEach(metaData.dataElements, function (item, key) {
     $scope.select[item.id] = $scope.select[item.id] || {};
@@ -1206,17 +1205,20 @@ angular.forEach(metaData.options, function (item, key) {
     };
 
 
-    $scope.filter = [{
-        id: '1',
-        name: 'Last Day'
-    }, {
-        id: '2',
-        name: 'Last Week'
-    }, {
-        id: '3',
-        name: 'Last Month'
+    $scope.filter = [
+        {
+            id: '1',
+            name: 'Last Day'
+        },
+        {
+            id: '2',
+            name: 'Last Week'
+        },
+        {
+            id: '3',
+            name: 'Last Month'
 
-    },
+        },
         {
             id: '4',
             name: 'No-Specific Duration'
@@ -1291,28 +1293,26 @@ angular.forEach(metaData.options, function (item, key) {
 
 
     $scope.getdate = function (filter) {
-
         if (filter.id == 1) {
             filDateSelected = true;
-             noDurationSelected = false;
+            noDurationSelected = false;
 
             date = lastDay;
             $scope.json();
         }
         if (filter.id == 2) {
             filDateSelected = true;
-             noDurationSelected = false;
+            noDurationSelected = false;
             date = lastWeek;
             $scope.json();
         }
         if (filter.id == 3) {
             filDateSelected = true;
-             noDurationSelected = false;
+            noDurationSelected = false;
 
             date = lastMonth;
             $scope.json();
         }
-
         if (filter.id == 4) {
             filDateSelected = true;
             noDurationSelected = true;
