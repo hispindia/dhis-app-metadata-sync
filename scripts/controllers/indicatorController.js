@@ -119,8 +119,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                 });
             }
             var g = $http.get(indicatorGroupSetUrl).then(function (response) {
-                console.log("resss : ");
-                console.log(response);
                 if (!response.data == "")
                 indicatorGroupSetJson = response.data;
 
@@ -296,11 +294,9 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
 
     $scope.getdate = function (filter) {
-        // console.log("dsfsfsfsfs");
         if (filter.id == 1) {
             filDateSelected = true;
             noDurationSelected = false;
-            console.log(lastDay);
             date = lastDay;
             $scope.json();
         }
@@ -313,7 +309,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
         if (filter.id == 3) {
             filDateSelected = true;
             noDurationSelected = false;
-            console.log(lastMonth);
             date = lastMonth;
             $scope.json();
         }
@@ -323,14 +318,12 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
             noDurationSelected = true;
 
             date = noDuration;
-            console.log(date);
             $scope.json();
         }
     };
 
 
     $scope.getGroup = function (group) {
-        console.log(group);
         indGroup = group;
         $scope.json();
 
@@ -383,26 +376,17 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
         var i = 0;
         angular.forEach(metaData.indicators, function (item, key) {
             if ($scope.indid[item.id]) {
-                console.log(item.id);
-
                 var dataaa = metaData.indicators[key];
                 x++;
                 angular.forEach(insarray.instances, function (instance, key) {
                     if (  $scope.select[item.id][instance.id]) {
                         filData[key].indicators[indexes[key]] = dataaa;
-
-
                         indexes[key]++;
                         i++;
                         x1 = true;
-
                     }
-
                 });
-
-
             }
-
         });
 
         if (x1 == false) {
@@ -433,7 +417,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                             }
                         }
                     }
-
                     for (var a = 0; a < filData[key].indicators.length; a++) {
                         for (var b = 0; b < indicatorTypeJson.indicatorTypes.length; b++) {
                             if (filData[key].indicators[a].indicatorType && filData[key].indicators[a].indicatorType.id == indicatorTypeJson.indicatorTypes[b].id) {
@@ -447,7 +430,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                             }
                         }
                     }
-
                     for (var m = 0; m < filData[key].indicators.length; m++) {
                         for (var n = 0; n < indicatorGroupJson.indicatorGroups.length; n++) {
                             for (var o = 0; o < filData[key].indicators[m].indicatorGroups.length; o++) {
@@ -463,7 +445,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                             }
                         }
                     }
-
                     for(var m = 0; m < filData[key].indicatorGroups.length; m++) {
                         if(filData[key].indicatorGroups[m].indicatorGroupSet){
                             for (var n = 0; n < indicatorGroupSetJson.indicatorGroupSets.length; n++) {
@@ -487,7 +468,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                     var coc;
                     for (var a = 0; a < filData[key].indicators.length; a++) {
 
-
                         if (filData[key].indicators[a].denominator) {
                             str1 = filData[key].indicators[a].denominator;
                             var found1 = [],          // an array to collect the strings that are found
@@ -498,7 +478,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                             while (curMatch1 = rxp1.exec(str1)) {
                                 found1.push(curMatch1[1]);
                             }
-
 
                             for (var k = 0; k < found1.length; k++) {
                                 str = found1[k];
@@ -515,23 +494,7 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                                         }
                                     }
                                 }
-
-                                for (var a = 0; a < filData[key].dataElements.length; a++) {
-                                    if(filData[key].dataElements[a].categoryCombo && filData[key].dataElements[a].categoryCombo.name != "default"){
-                                        for (var b = 0; b < categoryComboJson.categoryCombos.length; b++) {
-                                            if (filData[key].dataElements[a].categoryCombo.id == categoryComboJson.categoryCombos[b].id) {
-                                                var result = $.grep(filData[key].categoryCombos, function (e) {
-                                                    return e.id === categoryComboJson.categoryCombos[b].id;
-                                                });
-                                                if (result.length == 0) {
-                                                    filData[key].categoryCombos.push(categoryComboJson.categoryCombos[b]);
-                                                }
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-
+/*
                                 for (var c = 0; c < categoryOptionComboJson.categoryOptionCombos.length; c++) {
                                     if (coc == categoryOptionComboJson.categoryOptionCombos[c].id) {
                                         var result = $.grep(filData[key].categoryOptionCombos, function (e) {
@@ -542,10 +505,9 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                                         }
                                     }
                                 }
-
+*/
                             }
                         }
-
 
                         if (filData[key].indicators[a].numerator) {
                             str2 = filData[key].indicators[a].numerator;
@@ -573,7 +535,7 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                                         }
                                     }
                                 }
-
+/*
                                 for (var c = 0; c < categoryOptionComboJson.categoryOptionCombos.length; c++) {
                                     if (coc == categoryOptionComboJson.categoryOptionCombos[c].id) {
                                         var result = $.grep(filData[key].categoryOptionCombos, function (e) {
@@ -584,15 +546,91 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                                         }
                                     }
                                 }
-
+*/
                             }
                         }
 
                     }
 
+                    if(filData[key].dataElements){
+                        for (var a = 0; a < filData[key].dataElements.length; a++) {
+                            if(filData[key].dataElements[a].categoryCombo.name != "default"){
+                                for (var b = 0; b < categoryComboJson.categoryCombos.length; b++) {
+                                    if (filData[key].dataElements[a].categoryCombo.id == categoryComboJson.categoryCombos[b].id) {
+                                        var result = $.grep(filData[key].categoryCombos, function (e) {
+                                            return e.id === categoryComboJson.categoryCombos[b].id;
+                                        });
+                                        if (result.length == 0) {
+                                            filData[key].categoryCombos.push(categoryComboJson.categoryCombos[b]);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    for(var a=0; a < filData[key].categoryCombos.length; a++){
+                        if(filData[key].categoryCombos[a].categories) {
+                            for (var b = 0; b < filData[key].categoryCombos[a].categories.length; b++) {
+                                if (filData[key].categoryCombos[a].categories[b].name != "default") {
+                                    for (var c = 0; c < categoryJson.categories.length; c++) {
+                                        if (filData[key].categoryCombos[a].categories[b].id == categoryJson.categories[c].id) {
+                                            var result = $.grep(filData[key].categories, function (e) {
+                                                return e.id === categoryJson.categories[c].id;
+                                            });
+                                            if (result.length == 0) {
+                                                filData[key].categories.push(categoryJson.categories[c]);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if(filData[key].categoryCombos[a].categoryOptionCombos) {
+                            for (var b = 0; b < filData[key].categoryCombos[a].categoryOptionCombos.length; b++) {
+                                if (filData[key].categoryCombos[a].categoryOptionCombos[b].name != "default") {
+                                    for (var c = 0; c < categoryOptionComboJson.categoryOptionCombos.length; c++) {
+                                        if (filData[key].categoryCombos[a].categoryOptionCombos[b].id == categoryOptionComboJson.categoryOptionCombos[c].id) {
+                                            var result = $.grep(filData[key].categoryOptionCombos, function (e) {
+                                                return e.id === categoryOptionComboJson.categoryOptionCombos[c].id;
+                                            });
+                                            if (result.length == 0) {
+                                                filData[key].categoryOptionCombos.push(categoryOptionComboJson.categoryOptionCombos[c]);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    for(var a=0; a < filData[key].categories.length; a++){
+                        if(filData[key].categories[a].categoryOptions) {
+                            for (var b = 0; b < filData[key].categories[a].categoryOptions.length; b++) {
+                                if (filData[key].categories[a].categoryOptions[b].name != "default") {
+                                    for (var c = 0; c < categoryOptionJson.categoryOptions.length; c++) {
+                                        if (filData[key].categories[a].categoryOptions[b].id == categoryOptionJson.categoryOptions[c].id) {
+                                            var result = $.grep(filData[key].categoryOptions, function (e) {
+                                                return e.id === categoryOptionJson.categoryOptions[c].id;
+                                            });
+                                            if (result.length == 0) {
+                                                filData[key].categoryOptions.push(categoryOptionJson.categoryOptions[c]);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
 
                     var v = (filData[key]);
-                    console.log(v);
                     $("#coverLoad").show();
                     var header = {
 
@@ -618,7 +656,7 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                         .error(function (response) {
                             //$().toastmessage('showErrorToast', 'Make Sure Whether the Instance <br/>' + instance.name + ' is Connected . ');
                             $().toastmessage('showErrorToast', response);
-                            console.log("error response");
+                            console.log("sync is failed - error response");
                             console.log(response);
                             saveSync("error", filData[key], instance, "error");
                             $("#coverLoad").hide();
@@ -648,13 +686,10 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
     function saveSync(respo, filData, instance, res) {
 
         var m = 0;
-        console.log(respo.length);
-        console.log(respo[0].status);
 
         var k = $http.get("../../system/info").then(function (response) {
             response = response.data;
             syncedDate = response.serverDate.split("T")[0] + " (" + response.serverDate.split("T")[1].split(".")[0] + ")";
-            console.log(syncedDate);
         });
         $q.all([k]).then(function () {
 
@@ -663,9 +698,7 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
             }
             else {
                 for (var k = 0; k < respo.length; k++) {
-                    // console.log(respo[k].status);
                     if (respo[k].status == "SUCCESS") {
-                        console.log("hh");
                         t = 0;
                     }
                     else {
@@ -797,8 +830,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
     function msgSummary($http, $rootScope, filData, response, instance, respo) {
         //var er = syncSummary.stats.errors;
-        console.log(respo);
-        console.log(filData);
         var im = response.importCount.imported;
         var de = response.importCount.deleted;
         var up = response.importCount.updated;
@@ -814,83 +845,66 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
         for (var j = 0; j < respo.length; j++) {
             if (respo[j].status == "SUCCESS" && respo[j].type == "Indicator") {
-
                 allSyncData += '\n Indicators-:\n ';
-
                 for (var k = 0; k < filData.indicators.length; k++) {
                     allSyncData += filData.indicators[k].name + '\n';
-
                 }
             }
-
-
             if (respo[j].status == "SUCCESS" && respo[j].type == "IndicatorType") {
-
                 allSyncData += '\n Indicator Types-:\n ';
-
                 for (var k = 0; k < filData.indicatorTypes.length; k++) {
-
                     allSyncData += filData.indicatorTypes[k].name + "\n";
-
                 }
             }
-
             if (respo[j].status == "SUCCESS" && respo[j].type == "IndicatorGroupSet") {
-
                 allSyncData += '\n Indicator Group Sets-:\n ';
-
                 for (var k = 0; k < filData.indicatorGroupSets.length; k++) {
-
                     allSyncData += filData.indicatorGroupSets[k].name + "\n";
-
                 }
             }
-
             if (respo[j].status == "SUCCESS" && respo[j].type == "IndicatorGroup") {
-
                 allSyncData += '\n Indicator Groups-:\n ';
-
                 for (var k = 0; k < filData.indicatorGroups.length; k++) {
-
                     allSyncData += filData.indicatorGroups[k].name + "\n";
-
                 }
             }
-
             if (respo[j].status == "SUCCESS" && respo[j].type == "DataElement") {
-
                 allSyncData += '\n Data Elements-:\n ';
-
                 for (var k = 0; k < filData.dataElements.length; k++) {
-
                     allSyncData += filData.dataElements[k].name + "\n";
-
+                }
+            }
+            if (respo[j].status == "SUCCESS" && respo[j].type == "DataElementCategoryCombo") {
+                allSyncData += '\n Category Combos-:\n ';
+                for (var k = 0; k < filData.categoryCombos.length; k++) {
+                    allSyncData += filData.categoryCombos[k].name + "\n";
+                }
+            }
+            if (respo[j].status == "SUCCESS" && respo[j].type == "DataElementCategory") {
+                allSyncData += ' \nCategories-:\n ';
+                for (var k = 0; k < filData.categories.length; k++) {
+                    allSyncData += filData.categories[k].name + "\n";
+                }
+            }
+            if (respo[j].status == "SUCCESS" && respo[j].type == "DataElementCategoryOption") {
+                allSyncData += ' \nCategory Options-:\n ';
+                for (var k = 0; k < filData.categoryOptions.length; k++) {
+                    allSyncData += filData.categoryOptions[k].name + "\n";
                 }
             }
             if (respo[j].status == "SUCCESS" && respo[j].type == "CategoryOptionCombo") {
-
                 allSyncData += '\n Category Option Combos-:\n ';
-
                 for (var k = 0; k < filData.categoryOptionCombos.length; k++) {
-
                     allSyncData += filData.categoryOptionCombos[k].name + "\n";
-
                 }
             }
-
             if (respo[j].status == "SUCCESS" && respo[j].type == "Attribute") {
-
                 allSyncData += '\n Attributes-:\n ';
-
                 for (var k = 0; k < filData.attributes.length; k++) {
-
                     allSyncData += filData.attributes[k].name + "\n";
-
                 }
             }
-
         }
-
 
         msg += "\n Imported Count : " + im;
         msg += "\n Deleted Count : " + de;
@@ -906,7 +920,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
 
         var z = $http({method: 'get', url: instance.url + "/api/me.json", headers: header})
             .success(function (data) {
-                console.log(data);
                 proUserID = data.id;
             })
             .error(function (data) {
@@ -914,7 +927,6 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
             });
         var y = $http.get(natUserUrl).then(function (response) {
             if (!response.data == "")
-                console.log(response.data);
             natUserID = response.data.id;
         });
 
@@ -939,10 +951,8 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                 headers: {"Content-Type": 'application/json'}
             })
                 .success(function (response) {
-                    console.log(response);
                 })
                 .error(function (response) {
-                    console.log(response);
                 });
 
             var header = {
@@ -958,10 +968,8 @@ app.controller('indicatorController', function ($scope, $rootScope, $filter, $ht
                 headers: header
             })
                 .success(function (response) {
-                    console.log(response);
                 })
                 .error(function (response) {
-                    console.log(response);
                 });
         });
 

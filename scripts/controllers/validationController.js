@@ -45,9 +45,18 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
     var validationUrl = "../../validationRules.json?fields=:all&paging=false";
     var validationRuleGroupUrl = "../../validationRuleGroups.json?fields=:all&paging=false";
     var categoryOptionComboUrl = "../../categoryOptionCombos.json?fields=[:all]&paging=false";
+
+    var categoryComboUrl = "../../categoryCombos.json?fields=[:all]&paging=false";
+    var categoryUrl = "../../categories.json?fields=[:all]&paging=false";
+    var categoryOptionUrl = "../../categoryOptions.json?fields=[:all]&paging=false";
+
     var validationJson;
     var validationRuleGroupJson;
     var categoryOptionComboJson;
+
+    var categoryComboJson;
+    var categoryJson;
+    var categoryOptionJson;
 
     var check = 0;
     var filData = [];
@@ -81,7 +90,32 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                     validationRuleGroupJson = response.data;
             });
 
-            $q.all([a,b,c,d]).then(function (result) {
+            var e;
+            if (categoryComboJson == undefined) {
+                e = $http.get(categoryComboUrl).then(function (response) {
+                    if (!response.data == "")
+                        categoryComboJson = (response.data);
+
+                });
+            }
+            var f;
+            if (categoryOptionJson == undefined) {
+                f = $http.get(categoryOptionUrl).then(function (response) {
+                    if (!response.data == "")
+                        categoryOptionJson = (response.data);
+
+                });
+            }
+            var g;
+            if (categoryJson == undefined) {
+                g = $http.get(categoryUrl).then(function (response) {
+                    if (!response.data == "")
+                        categoryJson = (response.data);
+
+                });
+            }
+
+            $q.all([a,b,c,d,e,f,g]).then(function (result) {
 				
                 check++;
                 $scope.loading = false;
@@ -149,7 +183,10 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
             validationRules: [],
             validationRuleGroup: [],
             dataElements: [],
-            categoryOptionCombos:[]
+            categoryOptionCombos:[],
+            categoryCombos: [],
+            categories: [],
+            categoryOptions: []
         };
 
 
@@ -186,7 +223,10 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                 validationRules: [],
                 validationRuleGroups: [],
                 dataElements: [],
-                categoryOptionCombos:[]
+                categoryOptionCombos:[],
+                categoryCombos: [],
+                categories: [],
+                categoryOptions: []
 
             };
 
@@ -247,11 +287,10 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
     };
 
     $scope.getGroup = function (group) {
-
         valGroup = group;
         $scope.json();
-
     };
+
     var userUrl;
     var natUserUrl = "../../me.json";
     var indexes = [];
@@ -291,9 +330,11 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                 validationRules: [],
                 validationRuleGroups: [],
                 dataElements: [],
-                categoryOptionCombos:[]
+                categoryOptionCombos:[],
+                categoryCombos: [],
+                categories: [],
+                categoryOptions: []
             };
-
         });
         var x = 0;
         var i = 0;
@@ -360,7 +401,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                                         }
                                     }
                                 }
-
+/*
                                 for (var c = 0; c < categoryOptionComboJson.categoryOptionCombos.length; c++) {
                                     if (coc == categoryOptionComboJson.categoryOptionCombos[c].id) {
                                         var result = $.grep(filData[key].categoryOptionCombos, function (e) {
@@ -371,7 +412,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                                         }
                                     }
                                 }
-
+*/
                             }
                         }
 
@@ -402,7 +443,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                                         }
                                     }
                                 }
-
+/*
                                 for (var c = 0; c < categoryOptionComboJson.categoryOptionCombos.length; c++) {
                                     if (coc == categoryOptionComboJson.categoryOptionCombos[c].id) {
                                         var result = $.grep(filData[key].categoryOptionCombos, function (e) {
@@ -413,7 +454,7 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                                         }
                                     }
                                 }
-
+*/
                             }
                         }
                     }
@@ -436,8 +477,83 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
                         }
                     }
 
+                    if(filData[key].dataElements){
+                        for (var a = 0; a < filData[key].dataElements.length; a++) {
+                            if(filData[key].dataElements[a].categoryCombo.name != "default"){
+                                for (var b = 0; b < categoryComboJson.categoryCombos.length; b++) {
+                                    if (filData[key].dataElements[a].categoryCombo.id == categoryComboJson.categoryCombos[b].id) {
+                                        var result = $.grep(filData[key].categoryCombos, function (e) {
+                                            return e.id === categoryComboJson.categoryCombos[b].id;
+                                        });
+                                        if (result.length == 0) {
+                                            filData[key].categoryCombos.push(categoryComboJson.categoryCombos[b]);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    for(var a=0; a < filData[key].categoryCombos.length; a++){
+                        if(filData[key].categoryCombos[a].categories) {
+                            for (var b = 0; b < filData[key].categoryCombos[a].categories.length; b++) {
+                                if (filData[key].categoryCombos[a].categories[b].name != "default") {
+                                    for (var c = 0; c < categoryJson.categories.length; c++) {
+                                        if (filData[key].categoryCombos[a].categories[b].id == categoryJson.categories[c].id) {
+                                            var result = $.grep(filData[key].categories, function (e) {
+                                                return e.id === categoryJson.categories[c].id;
+                                            });
+                                            if (result.length == 0) {
+                                                filData[key].categories.push(categoryJson.categories[c]);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if(filData[key].categoryCombos[a].categoryOptionCombos) {
+                            for (var b = 0; b < filData[key].categoryCombos[a].categoryOptionCombos.length; b++) {
+                                if (filData[key].categoryCombos[a].categoryOptionCombos[b].name != "default") {
+                                    for (var c = 0; c < categoryOptionComboJson.categoryOptionCombos.length; c++) {
+                                        if (filData[key].categoryCombos[a].categoryOptionCombos[b].id == categoryOptionComboJson.categoryOptionCombos[c].id) {
+                                            var result = $.grep(filData[key].categoryOptionCombos, function (e) {
+                                                return e.id === categoryOptionComboJson.categoryOptionCombos[c].id;
+                                            });
+                                            if (result.length == 0) {
+                                                filData[key].categoryOptionCombos.push(categoryOptionComboJson.categoryOptionCombos[c]);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    for(var a=0; a < filData[key].categories.length; a++){
+                        if(filData[key].categories[a].categoryOptions) {
+                            for (var b = 0; b < filData[key].categories[a].categoryOptions.length; b++) {
+                                if (filData[key].categories[a].categoryOptions[b].name != "default") {
+                                    for (var c = 0; c < categoryOptionJson.categoryOptions.length; c++) {
+                                        if (filData[key].categories[a].categoryOptions[b].id == categoryOptionJson.categoryOptions[c].id) {
+                                            var result = $.grep(filData[key].categoryOptions, function (e) {
+                                                return e.id === categoryOptionJson.categoryOptions[c].id;
+                                            });
+                                            if (result.length == 0) {
+                                                filData[key].categoryOptions.push(categoryOptionJson.categoryOptions[c]);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     var v = (filData[key]);
-                    console.log(v);
                     $("#coverLoad").show();
                     var header = {
 
@@ -655,32 +771,41 @@ app.controller('validationController', function ($scope, $rootScope, $filter, $h
 
         for (var j = 0; j < respo.length; j++) {
             if (respo[j].status == "SUCCESS" && respo[j].type == "ValidationRule") {
-
                 allSyncData += '\n Validation Rules\n ';
-
                 for (var k = 0; k < filData.validationRules.length; k++) {
                     allSyncData += filData.validationRules[k].name + '\n';
-
                 }
             }
             if (respo[j].status == "SUCCESS" && respo[j].type == "ValidationRuleGroup") {
-
                 allSyncData += '\n Validation Rule Groups\n ';
-
                 for (var k = 0; k < filData.validationRuleGroups.length; k++) {
                     allSyncData += filData.validationRuleGroups[k].name + '\n';
-
                 }
             }
             if (respo[j].status == "SUCCESS" && respo[j].type == "DataElement") {
                 allSyncData += "\n Data Elements\n ";
                 for (var k = 0; k < filData.dataElements.length; k++) {
-
                     allSyncData += filData.dataElements[k].name + "\n";
                 }
-
             }
-
+            if (respo[j].status == "SUCCESS" && respo[j].type == "DataElementCategoryCombo") {
+                allSyncData += '\n Category Combos-:\n ';
+                for (var k = 0; k < filData.categoryCombos.length; k++) {
+                    allSyncData += filData.categoryCombos[k].name + "\n";
+                }
+            }
+            if (respo[j].status == "SUCCESS" && respo[j].type == "DataElementCategory") {
+                allSyncData += ' \nCategories-:\n ';
+                for (var k = 0; k < filData.categories.length; k++) {
+                    allSyncData += filData.categories[k].name + "\n";
+                }
+            }
+            if (respo[j].status == "SUCCESS" && respo[j].type == "DataElementCategoryOption") {
+                allSyncData += ' \nCategory Options-:\n ';
+                for (var k = 0; k < filData.categoryOptions.length; k++) {
+                    allSyncData += filData.categoryOptions[k].name + "\n";
+                }
+            }
         }
 
 
