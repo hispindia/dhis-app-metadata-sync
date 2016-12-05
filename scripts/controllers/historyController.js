@@ -12,16 +12,10 @@ var historyList = [];
 app.controller('historyController', function ($rootScope, $http) {
     $http.get(syncHistoryUrl).then(function (response) {
         if (response.data != "\"x\"" && response.data != "") {
-
-		
-		
-				 $rootScope.history = response.data.data;
+            $rootScope.history = response.data.data;
             historyList = $rootScope.history;
-			
-           
 
             printTable();
-			
         }
 
         $("#coverLoad").hide();
@@ -34,10 +28,9 @@ app.controller('historyController', function ($rootScope, $http) {
         if (r == true) {
             var historyJSON = "x";
             var history = JSON.stringify(historyJSON);
-            $http.post(syncHistoryUrl, history, {headers: {'Content-Type': 'text/plain;charset=utf-8'}});
-
-            window.location.assign("history.html");
-
+            $http.post(syncHistoryUrl, history, {headers: {'Content-Type': 'text/plain;charset=utf-8'}}).then(function(res) {
+                window.location.assign("history.html");
+            });;
         }
     };
 });

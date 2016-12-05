@@ -11,9 +11,7 @@
 var notificationList = [];
 app.controller('notificationController', function ($rootScope, $http) {
     $http.get(syncNotificationUrl).then(function (response) {
-		 
         if (response.data != "\"x\"" && response.data != "") {
-            //console.log(response);
             $rootScope.notifications = response.data.data;
             notificationList = $rootScope.notifications;
 
@@ -29,10 +27,9 @@ app.controller('notificationController', function ($rootScope, $http) {
         if (r == true) {
             var notifyJSON = "x";
             var notify = JSON.stringify(notifyJSON);
-            $http.post(syncNotificationUrl, notify, {headers: {'Content-Type': 'text/plain;charset=utf-8'}});
-
-            window.location.assign("notifications.html");
-
+            $http.post(syncNotificationUrl, notify, {headers: {'Content-Type': 'text/plain;charset=utf-8'}}).then(function(res) {
+                window.location.assign("notifications.html");
+            });
         }
     };
 });
@@ -47,7 +44,6 @@ function stat(ind) {
     var instance = notificationList[ind];
     var index = 1;
     //var instance=JSON.parse(ins);
-    //console.log(instance);
     $("#myModalLabel").html("Following Metadata Were affected by this");
     $('#share_list_popup').html(" ");
     for (var j = 0; j < instance.response.length; j++) {
@@ -208,7 +204,6 @@ function printTable() {
 
     notificationList.forEach(function (hs, index) {
         var j = JSON.stringify(hs);
-        //console.log(j);
         htmlStr = "<tr align='center'>";
         htmlStr += "<td>" + hs.notification + "</td>";
         htmlStr += "<td>" + hs.date + "</td>";
