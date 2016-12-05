@@ -398,6 +398,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                                         if (result.length == 0) {
                                             filData[key].attributes.push(attributeJson.attributes[val]);
                                         }
+                                        break;
                                     }
 
                                 }
@@ -416,6 +417,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                                         if (result.length == 0) {
                                             filData[key].organisationUnitGroups.push(orgUnitGroupJson.organisationUnitGroups[val]);
                                         }
+                                        break;
                                     }
                                 }
                             }
@@ -433,6 +435,7 @@ app.controller('orgUnitController', function ($scope, $rootScope, $filter, $http
                                         if (result.length == 0) {
                                             filData[key].organisationUnitGroupSets.push(orgUnitGroupSetJson.organisationUnitGroupSets[val]);
                                         }
+                                        break;
                                     }
                                 }
                             }
